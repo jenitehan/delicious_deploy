@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Update hooks for deploying changes to my awesome website.
+ */
+
+/**
+* Implements hook_install().
+*/
+function delicious_deploy_install() {
+  // Set an initial value for the schema version so we can run updates after install.
+  drupal_set_installed_schema_version('delicious_deploy', 7100);
+}
+
+/**
+ * Enable some features.
+ */
+function delicious_deploy_update_7101() {
+  $module_list = array(
+    'my_feature',
+    'my_other_feature',
+  );
+  module_enable($module_list);
+}
+
+/**
+ * Revert some features.
+ */
+function delicious_deploy_update_7102() {
+  // Revert features
+  $revert = array(
+    'my_content_type' => array('node', 'field_instance', 'field_group', 'variable'),
+    'my_variables' => array('variable'),
+  );
+  features_revert($revert);
+}
+
+/**
+ * More updates...
+ */
+function delicious_deploy_update_7103() {
+  // More updates go here.
+}
